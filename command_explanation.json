@@ -1,0 +1,23 @@
+{
+    "balance_check":{
+        "name":{
+            "Korean": "잔고확인"
+        },
+        "description":{
+            "Korean": "참치/명예 포인트 잔고를 확인합니다."
+        },
+        "options":{
+            "Korean":[
+            {"name": "대상", "description":"대상의 잔고를 확인합니다."}
+            ]
+        }
+    },
+    "wallet_create":{
+        "name":{
+            "Korean": "지갑개설"
+        },
+        "description":{
+            "Korean": "참치서버용 지갑을 개설합니다."
+        }
+    }
+}

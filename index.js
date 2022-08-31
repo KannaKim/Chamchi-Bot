@@ -45,8 +45,7 @@ client.on('messageCreate', async message => {
 		if(commands.length != 5) await message.reply("잘못된 사용법입니다.\n@봇멘션 잔고증가 [user id] [참치 | 명예] [amount]\n사용 예시:@참치 잔고차감 185979168822001665 참치 10000");
 		
 		else {
-			let msg =""
-			msg = await balance.add_balance(discord_util.mention_to_id(commands[2]),commands[3],commands[4])
+			let msg = await balance.add_balance(commands[2],commands[3],commands[4])
 			message.reply(msg)
 		}
 	}

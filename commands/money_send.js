@@ -13,7 +13,14 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('포인트종류')
 				.setDescription('포인트를 보낼 종류, 참치 또는 명예가 있습니다.')
-				.setRequired(true))
+				.setRequired(true)
+				.addChoices({
+					name: "참치",
+					value: "참치"
+				},{
+					name: "명예",
+					value: "명예"
+				}))
 		.addIntegerOption(option =>
 			option.setName('송금양')
 				.setDescription('보낼 포인트의 양, 정수만 가능합니다.')
@@ -23,7 +30,7 @@ module.exports = {
 		let msg = ""
 		if(commands.length != 3) await interaction.reply("잘못된 사용법입니다.\n@봇멘션  [user id] [참치 | 명예] [amount]\n사용 예시:@참치, 잔고설정, 185979168822001665, 참치, 10000");
 		else{
-			msg = await balance.send_money(interaction.user.id, commands[0].value, commands[1].value, commands[2].value+"").catch(reject=>{msg=reject})		
+			msg = await balance.send_money(interaction.user.id, commands[0].value, commands[1].value, commands[2].value+"")		
 		}
 		await interaction.reply(msg)
 	},

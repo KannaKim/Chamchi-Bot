@@ -2,7 +2,7 @@ function is_mention(str){
     return (/^<@!*([0-9])+>$/g).test(str)
 }
 function mention_to_id(str){
-    return str.match(/[0-9]+/) ? str.match(/[0-9]+/)[0]:null 
+    return str.match(/[0-9]+/) ? str.match(/[0-9]+/)[0]:"" 
 }
 
 module.exports = {

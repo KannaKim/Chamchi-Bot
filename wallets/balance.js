@@ -27,15 +27,15 @@ function subtract(target, type, amount, resolve, reject){
             reject("등록되지않은 회원이거나 데이터를 등록하는중 오류가 발생하였습니다.")
         }
         else{
-            resolve(`설정 완료`)
+            resolve()
         }
     })
 }
 function add_wrapper(target, type, amount){
     return new Promise(
         (resolve, reject)=>{
-            if( !(discord_util.is_mention(target) || validator.isNumeric(target))) reject("잘못된 대상입니다.")
-            else if( !misc.isKorean(type) ) reject("잘못된 타입입니다.")
+            if( !(validator.isNumeric(target) || discord_util.is_mention(target)))reject("잘못된 대상입니다.")
+            else if( !definition.currency_type.get(type) ) reject("잘못된 타입입니다.")
             else if( !validator.isNumeric(amount) ) reject("잘못된 양입니다.")
             
             let target_sanitized = discord_util.mention_to_id(target)
@@ -50,10 +50,13 @@ function add(target, type, amount, resolve, reject){
     conn.query(`update chamchi_database.point_info set ${type} = ${type} + ${amount} where user_id = ?`,[target],
     (err, result)=>{
         if(err){
-            reject("등록되지않은 회원이거나 데이터를 등록하는중 오류가 발생하였습니다.")
+            reject("데이타베이스에 오류가 발생하엿습니다.")
+        }
+        else if(result.affectedRows == 0){
+            reject("등록되지않은 회원입니다.")
         }
         else{
-            resolve(`설정 완료`)
+            resolve()
         }
     })
 }
@@ -75,7 +78,7 @@ function set(target, type, amount, resolve, reject){
             reject("등록되지않은 회원이거나 데이터를 등록하는중 오류가 발생하였습니다.")
         }
         else{
-            resolve(`설정 완료`)
+            resolve()
         }
     })
 }
@@ -95,6 +98,9 @@ function get_point_wrapper(user_id, type){
 function get_point(user_id, type, resolve, reject){
     conn.query(`select ${type} from chamchi_database.point_info where user_id = ?`,[user_id],
     (err, result)=>{
+        if(err){
+            reject("오류가 발생하였습니다.")
+        }
         if(result.length == 0){
             reject("등록되지않은 회원입니다.")
         }

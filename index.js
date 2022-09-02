@@ -22,22 +22,21 @@ client.once('ready', () => {
 });
 client.on('messageCreate', async message => {
 	const commands = message.content.split(" ")
+	
 	if(!message.content.startsWith(`<@${clientId}>`)) return;	// @mention [잔고설정] <userID | userName+Tag> <참치 | 명예 > <amount>
 	if(commands[1] == '잔고설정' && server_admin.includes(message.author.id)){
 		if(commands.length != 5) await message.reply("잘못된 사용법입니다.\n@봇멘션 잔고설정 [user id] [참치 | 명예] [amount]\n사용 예시:@참치 잔고설정 185979168822001665 참치 10000");
 		
-		else balance.set_wrapper(commands[2], commands[3], commands[4]).then((resolve)=>{
-			message.reply(resolve)
-			balance.get_wrapper(message.author.id).then(resolve=>message.reply(resolve)).catch(reject=>message.reply(reject))
-		}).catch((rejects)=>{
-			message.reply(rejects)
-		})
+		else{
+			let msg = await balance.set_balance(message.author.id, commands[2], commands[3], commands[4])
+			await message.reply(msg)
+		}
 	}
 	else if(commands[1] == '잔고감소' && server_admin.includes(message.author.id)){
 		if(commands.length != 5) await message.reply("잘못된 사용법입니다.\n@봇멘션 잔고감소 [user id] [참치 | 명예] [amount]\n사용 예시:@참치 잔고차감 185979168822001665 참치 10000");
 		else{
 			let msg =""
-			msg = await balance.reduce_balance(discord_util.mention_to_id(commands[2]),commands[3],commands[4])
+			msg = await balance.reduce_balance(message.author.id, discord_util.mention_to_id(commands[2]),commands[3],commands[4])
 			message.reply(msg)
 		} 
 	}
@@ -45,7 +44,7 @@ client.on('messageCreate', async message => {
 		if(commands.length != 5) await message.reply("잘못된 사용법입니다.\n@봇멘션 잔고증가 [user id] [참치 | 명예] [amount]\n사용 예시:@참치 잔고차감 185979168822001665 참치 10000");
 		
 		else {
-			let msg = await balance.add_balance(commands[2],commands[3],commands[4])
+			let msg = await balance.add_balance(message.author.id, commands[2],commands[3],commands[4])
 			message.reply(msg)
 		}
 	}

@@ -4,7 +4,7 @@ const {money_transfer_tax_rates} = require("../config.json")
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('송금')
-		.setDescription(`참치서버용 참치/명예 포인트를 송금합니다.\n **${money_transfer_tax_rates}%에 수수료가 부가됩니다.**\n사용방법: /송금 <대상> <포인트 종류> <송금 양>\n`,[]
+		.setDescription(`참치서버용 참치/명예 포인트를 송금합니다.\n${money_transfer_tax_rates}%에 수수료가 부가됩니다.**\n사용방법: /송금 <대상> <포인트 종류> <송금 양>\n`,[]
         +'사용예시:\n/송금 @참치 명예 20\n/송금 @참치 참치 1000')
 		.addStringOption(option =>
             option.setName('대상')

@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Partials, Collection, GatewayIntentBits} = require('discord.js');
-const { token, clientId, server_admin } = require('./config.json');
+const { token, clientId, server_admin } = require('./config');
 const balance = require('./factory/balance')
 const discord_util = require("./utill/discord")
 const client = new Client({ partials: [Partials.Message], intents: [GatewayIntentBits.MessageContent,

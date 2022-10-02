@@ -8,12 +8,12 @@ const validator = require("validator")
 async function get_statement(user_id){
     user_id = discord_util.mention_to_id(user_id)
     if(!user_id) return "잘못된 유저아이디입니다."
-    let chamchi_balance = await balance.get_point_wrapper(user_id,"chamchi_point").catch(reject=>{reject})
+    let chamchi_balance = await balance.get_point_wrapper(user_id,"chamchi_point")
     if(chamchi_balance == undefined){
         return "유저가 존재하지않습니다."
     }
 
-    let honor_balance = await balance.get_point_wrapper(user_id,"honor_point").catch(reject=>{reject})
+    let honor_balance = await balance.get_point_wrapper(user_id,"honor_point")
     if(!honor_balance == undefined){
         return "유저가 존재하지않습니다."
     }
@@ -51,7 +51,7 @@ async function send_money(payer, payee, payment_type_local, amount){
         return `보내는 양이 너무 작습니다. 최소 ${min_send_amount} 이상 보내주세요`
     }
 
-    let payer_balance = await balance.get_point_wrapper(payer, payment_type).catch(reject=>{reject})
+    let payer_balance = await balance.get_point_wrapper(payer, payment_type)
     if(typeof payer_balance != 'number' ){
         return payer_balance;
     } 
@@ -62,12 +62,12 @@ async function send_money(payer, payee, payment_type_local, amount){
     let amount_after_tax = Math.round(parseInt(amount) * (100-tax)/100)+""
     let taxed_amount = amount - amount_after_tax
 
-    let subtract_err = await balance.subtract_wrapper(payer, payment_type, amount).catch(reject=>{reject})
+    let subtract_err = await balance.subtract_wrapper(payer, payment_type, amount)
     if(subtract_err){
         return subtract_err
     }
 
-    let add_err = await balance.add_wrapper(payee, payment_type, amount_after_tax).catch(reject=>{reject})
+    let add_err = await balance.add_wrapper(payee, payment_type, amount_after_tax)
     if(add_err){
         return add_err
     }
@@ -97,19 +97,18 @@ async function reduce_balance(admin_id, target, payment_type_local, amount){
     if(!validator.isNumeric(amount)){
         return "amount is wrong"
     }
-
-    let sub_err = await balance.subtract_wrapper(target, payment_type, amount).catch(reject=>{reject})
+    let sub_err = await balance.subtract_wrapper(target, payment_type, amount)
     if(sub_err){
         return sub_err
     }
 
     let log_msg = `admin ${admin_id} has reduced ${amount}${payment_type_local} to ${target}`
-    let log_err = await loggers.save_log_to_sql_wrapper(admin_id, log_msg).catch(reject=> reject)
+    let log_err = await loggers.save_log_to_sql_wrapper(admin_id, log_msg)
     if(log_err){
         return log_err
     }
 
-    let target_balance = await get_statement(target).catch(reject=>{reject})
+    let target_balance = await get_statement(target)
     if(!target_balance){
         return "존재하지않는 유저입니다"
     }
@@ -141,7 +140,7 @@ async function set_balance(admin_id, target ,payment_type_local, amount){
         return log_err
     }
 
-    let target_balance = await get_statement(target).catch(reject=>{reject})
+    let target_balance = await get_statement(target)
     if(!target_balance){
         return "유저가 존재하지않습니다."
     }
@@ -162,7 +161,7 @@ async function add_balance(admin_id, target, payment_type_local, amount){
         return "amount is wrong"
     }
 
-    let sub_err = await balance.add_wrapper(target, payment_type, amount).catch(reject=>{reject})
+    let sub_err = await balance.add_wrapper(target, payment_type, amount)
     if(sub_err){
         return sub_err
     }
@@ -173,7 +172,7 @@ async function add_balance(admin_id, target, payment_type_local, amount){
         return log_err
     }
 
-    let target_balance = await get_statement(target).catch(reject=>{reject})
+    let target_balance = await get_statement(target)
     if(!target_balance){
         return "존재하지않는 유저입니다"
     }

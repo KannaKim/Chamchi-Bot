@@ -1,4 +1,4 @@
-const { conn } = require("../sql_config")
+const { pool } = require("../sql_config")
 const validator = require("validator")
 const discord_util = require("../utill/discord")
 function save_log_to_sql_wrapper(user_id, context){
@@ -8,24 +8,32 @@ function save_log_to_sql_wrapper(user_id, context){
     })
 }
 function save_log_to_sql(user_id, context, resolve, reject){
-    conn.query(`INSERT INTO chamchi_database.log_info 
-    set user_id = (
-    SELECT user_id
-      FROM user_info
-     WHERE user_id = ?),
-     context = ?`,[user_id ,context],
-    (err, result)=>{
-        if(err){
-            reject("데이타베이스에 오류가 발생하엿습니다.")
-        }
-        else if(result.affectedRows == 0){
-            reject("등록되지않은 회원입니다.")
-        }
-        else{
-            resolve()
-        }
-    })
-    
+    pool.getConnection(function(err,connection){
+        if (err) {
+          connection.release();
+          throw err;
+        }   
+        connection.query(`INSERT INTO chamchi_database.log_info 
+        set user_id = (
+        SELECT user_id
+          FROM user_info
+         WHERE user_id = ?),
+         context = ?`,[user_id ,context], function(err, result){
+            connection.release();
+            if(err){
+                reject("데이타베이스에 오류가 발생하엿습니다.")
+            }
+            else if(result.affectedRows == 0){
+                reject("등록되지않은 회원입니다.")
+            }
+            else{
+                resolve()
+            }     
+        });
+        connection.on('error', function(err) {      
+              throw err;
+        });
+    });
 }
 module.exports = {
     save_log_to_sql_wrapper

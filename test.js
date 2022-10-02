@@ -1,8 +1,16 @@
-const axios = require('axios')
-function getData() {
-    return axios.get('https://jsonplaceholder.typicode.com/posts');
-  }
-  (async () => {
-    result = await getData()
-    console.log(result)
- })()
+function resolveAfter2Seconds() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      aszxc.error()
+      resolve('resolved');
+    }, 2000);
+  });
+}
+async function asyncCall() {
+  console.log('calling');
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: "resolved"
+}
+
+asyncCall();

@@ -4,7 +4,12 @@ function isKorean(str){
 function isEnglisOrUnderScore(str){
     return (/([a-z]|[A-Z]|_)*/).test(str)
 }
+function chunkString(str, length) {
+    return str.match(new RegExp('(.||\n){1,' + length + '}', 'g'));
+}
+
 module.exports = {
     isKorean,
-    isEnglisOrUnderScore
+    isEnglisOrUnderScore,
+    chunkString
 }

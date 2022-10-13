@@ -1,7 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
 const balance = require('../factory/balance')
 const discord_util = require("../utill/discord")
+const misc = require("../utill/misc")
 const trace = require("../factory/trace")
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('조회')
@@ -29,6 +31,10 @@ module.exports = {
         else if(interaction){
             balance_msg = await trace.get_user_record(id, interaction.options.data[1].value)
         }
-        await interaction.reply(balance_msg)
+        let msg_arr = misc.chunkString(balance_msg, 2000)   //only quickfix, more elaborate method needs to be implemented later
+        await interaction.reply(msg_arr[0])
+        for(let i=1; i<msg_arr.length-1;i++){
+            await interaction.followUp(msg_arr[i])
+        }
 	},
 };``

@@ -135,7 +135,7 @@ function get_point(user_id, type, resolve, reject){
                 reject()
             }
             else if(result.length == 0){
-                reject()
+                reject("등록되지않은 회원입니다.")
             }
             else{
                 resolve(Math.round(result[0][type]))

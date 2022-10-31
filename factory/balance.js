@@ -63,10 +63,7 @@ async function send_money(payer, payee, payment_type_local, amount){
     if(typeof payee_balance != 'number' ){
         return payee_balance;
     } 
-    if(payee_balance - amount < 0){
-        return "잔고가 모자랍니다"
-    }
-
+    
     let tax = money_transfer_tax_rates
     let amount_after_tax = Math.round(parseInt(amount) * (100-tax)/100)+""
     let taxed_amount = amount - amount_after_tax

@@ -3,7 +3,6 @@ const def = require("../definition")
 const validator = require("validator")
 const misc = require("../utill/misc")
 const discord_util = require("../utill/discord")
-const definition = require("../definition")
 
 function subtract_wrapper(target, type, amount){
     return new Promise(
@@ -33,15 +32,6 @@ function subtract(target, type, amount, resolve, reject){
               throw err;
         });
     });
-    // conn.query(`update chamchi_database.point_info set ${type} = ${type} - ? where user_id = ?`,[amount, target],
-    // (err, result)=>{
-    //     if(err){
-    //         reject("등록되지않은 회원이거나 데이터를 등록하는중 오류가 발생하였습니다.")
-    //     }
-    //     else{
-    //         resolve()
-    //     }
-    // })
 }
 function add_wrapper(target, type, amount){
     return new Promise(
@@ -104,15 +94,6 @@ function set(target, type, amount, resolve, reject){
               throw err;
         });
     });
-    // conn.query(`update chamchi_database.point_info set ${type} = ? where user_id = ?`,[amount, target],
-    // (err, result)=>{
-    //     if(err){
-    //         reject("등록되지않은 회원이거나 데이터를 등록하는중 오류가 발생하였습니다.")
-    //     }
-    //     else{
-    //         resolve()
-    //     }
-    // })
 }
 function get_point_wrapper(user_id, type){
     return new Promise(
@@ -145,18 +126,6 @@ function get_point(user_id, type, resolve, reject){
               throw err;
         });
     });
-    // conn.query(`select ${type} from chamchi_database.point_info where user_id = ?`,[user_id],
-    // (err, result)=>{
-    //     if(err){
-    //         reject()
-    //     }
-    //     else if(result.length == 0){
-    //         reject()
-    //     }
-    //     else{
-    //         resolve(Math.round(result[0][type]))
-    //     }
-    // })
 }
 module.exports = {
     set_wrapper,

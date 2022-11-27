@@ -72,11 +72,9 @@ client.on('interactionCreate', async interaction => {
 	const command = client.commands.get(interaction.commandName);
 
 	if (!command) return;
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		await interaction.reply({ content: error, ephemeral: true });
-	}
+
+	await command.execute(interaction);
+
 });
 
 client.login(token);

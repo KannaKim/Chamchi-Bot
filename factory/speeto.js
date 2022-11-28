@@ -85,7 +85,7 @@ function speeto_text_generate(model, jackpot_amount, reward, remaining_chip){
     let speeto_text = `**JACKPOT: ${jackpot_amount} ${definition.currency_name_to_tiker.get("카지노칩")}**\n`
     for(let i=0; i<5; i++){
         for(let j=0; j<model["speetto"][i]["row"].length; j++){
-            if(casino.arrHasK_N_times(model["speetto"][i]["row"], model["speetto"][i]["row"][j], model["speetto"][i]["duplicate"])){
+            if(casino.arrHasK_N_times(model["speetto"][i]["row"], model["speetto"][i]["row"][j], 2)){
                 speeto_text += `***${model["speetto"][i]["row"][j]}*** `
             }
             else{

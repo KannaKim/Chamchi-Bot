@@ -1,7 +1,6 @@
 function resolveAfter2Seconds() {
   return new Promise(resolve => {
     setTimeout(() => {
-      aszxc.error()
       resolve('resolved');
     }, 2000);
   });

@@ -5,4 +5,9 @@ speeto
 casino
 -add loggers   //done
 -add statement //done
--add jackpot contribution, improve result page
+-add jackpot contribution, improve result page //done
+20221128
+casino
+-add sell command
+-improve result page; must show duplicate even if it's not a win
+-add simple casino game 

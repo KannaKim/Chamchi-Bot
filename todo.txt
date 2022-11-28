@@ -1,0 +1,8 @@
+20221115
+조회대상 can be non-user (bug)
+20221116
+speeto 
+casino
+-add loggers   //done
+-add statement //done
+-add jackpot contribution, improve result page

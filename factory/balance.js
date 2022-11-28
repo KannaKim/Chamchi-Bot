@@ -32,7 +32,7 @@ async function send_money_logger_context_generate(payer, payee, payment_type, am
     let log_msg = `${payer} sent ${amount} ${payment_type} to ${discord_util.mention_to_id(payee)}, taxed amount: ${taxed_amount} ${payment_type} sent amount after tax: ${amount_after_tax} ${payment_type},payer balance: ${payer_chamchi} CHAMCHI ${payer_honour} HONOUR, payee balance: ${payee_chamchi} CHAMCHI ${payee_honour} HONOUR`
     return log_msg
 }
-async function purchase(payerID, payerNickname, asset_type, purchase_amount, payment_type="참치"){
+async function purchase(payerID, asset_type, purchase_amount, payment_type="참치"){
     let asset_type_var_name = definition.currency_type.get(asset_type)
     payment_type = definition.currency_type.get(payment_type)
     purchase_amount+=""     // this is necessary, as validator does not recognize integer
@@ -58,7 +58,7 @@ async function purchase(payerID, payerNickname, asset_type, purchase_amount, pay
 
     let remaining_balance = await get_statement(payerID)
 
-    let log_msg = `${payerNickname}(${payerID}) bought ${purchase_amount} ${asset_type} remaining balance:${remaining_balance}`
+    let log_msg = `${payerID} bought ${purchase_amount} ${asset_type} remaining balance:${remaining_balance}`
 
     let log_err = await loggers.save_log_to_sql_wrapper(payerID, log_msg).catch(reject=> reject)
     if(log_err){

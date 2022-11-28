@@ -20,7 +20,7 @@ module.exports = {
 	async execute(interaction) {
         let msg = ""
         if(interaction.options.data.length == 2){   //userid: interaction.user.id
-            msg = await balance.purchase(interaction.user.id, interaction.member.nickname, interaction.options.data[0].value, interaction.options.data[1].value)
+            msg = await balance.purchase(interaction.user.id, interaction.options.data[0].value, interaction.options.data[1].value)
         }
         await interaction.reply(msg)
 	},

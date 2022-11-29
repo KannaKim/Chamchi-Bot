@@ -7,9 +7,9 @@ const discord_util = require("../utill/discord")
 function subtract_wrapper(target, type, amount){
     return new Promise(
         (resolve, reject)=>{
-            if( !(validator.isNumeric(target))) reject("잘못된 대상입니다.")
-            else if( !misc.isEnglisOrUnderScore(type) ) reject("잘못된 타입입니다.")
-            else if( !validator.isNumeric(amount) ) reject("잘못된 양입니다.")
+            if( !(validator.isNumeric(String(target)))) reject("잘못된 대상입니다.")
+            else if( !misc.isEnglisOrUnderScore(String(type)) ) reject("잘못된 타입입니다.")
+            else if( !validator.isNumeric(String(amount)) ) reject("잘못된 양입니다.")
             return subtract(target, type, amount, resolve, reject)
         }
     )

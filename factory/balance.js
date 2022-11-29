@@ -43,7 +43,7 @@ async function purchase(payerID, asset_type, purchase_amount, payment_type="ì°¸ì
         return payer_balance;
     } 
     if(payer_balance - purchase_amount*chamchi_per_chip > 0){
-        let subtract_err = await balance.subtract_wrapper(payerID, payment_type, purchase_amount)
+        let subtract_err = await balance.subtract_wrapper(payerID, payment_type, purchase_amount*chamchi_per_chip)
         if(subtract_err){
             return subtract_err
         }

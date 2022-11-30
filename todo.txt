@@ -8,6 +8,7 @@ casino
 -add jackpot contribution, improve result page //done
 20221128
 casino
--add sell command
+-add sell command //done
 -improve result page; must show duplicate even if it's not a win (done)
 -add simple casino game 
+-add check jackpot

@@ -16,6 +16,7 @@ module.exports = {
             .addIntegerOption(option=> 
                 option.setName("양")
                 .setDescription("구매할 자산의 양")
+                .setMinValue(1)
                 .setRequired(true)),
 	async execute(interaction) {
         let msg = ""

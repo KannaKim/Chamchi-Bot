@@ -22,13 +22,15 @@ describe('UtillSpeeto', function () {
         }
         let elipson = Math.pow(10,precision)
         let cumulativeProb = Math.round(numOfTrue/iteration*elipson)/elipson
+        console.log(cumulativeProb)
         expect(cumulativeProb).to.equal(expectedProb)
       }
-
-      probCheck(0.34, 2, 8, 3, 1000000, 2)
-      probCheck(0.1, 2, 58, 4, 1000000, 2)
-      probCheck(0.01, 3, 31, 5, 1000000, 2)
-      probCheck(0.0001, 4, 52, 6, 100000, 4)
+      this.timeout(1000000)
+      probCheck(0.5, 2, 2, 2, 50000000, 2)
+      probCheck(0.34, 2, 8, 3, 50000000, 2)
+      probCheck(0.1, 2, 58, 4, 50000000, 2)
+      probCheck(0.01, 3, 30, 5, 50000000, 2)
+      probCheck(0.0001, 4, 52, 6, 50000000, 5)
 
     })
   });

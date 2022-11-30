@@ -120,5 +120,6 @@ function getReward(model){    // return reward amount
 } 
 module.exports = {
     getReward,
-    execute
+    execute,
+    createModel
 }

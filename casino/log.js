@@ -8,8 +8,8 @@ const definition = require("../definition")
 function profit_log_wrapper(target, amount){
     return new Promise(
         (resolve, reject)=>{
-            if( !(validator.isNumeric(target))) reject("잘못된 대상입니다.")
-            else if( !(validator.isNumeric(amount)) ) reject("잘못된 amount 입니다.")
+            if( !(validator.isNumeric(String(target)))) reject("잘못된 대상입니다.")
+            else if( !(validator.isNumeric(String(amount))) ) reject("잘못된 amount 입니다.")
             return profit_log(target, amount, resolve, reject)
         }
     )

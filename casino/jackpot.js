@@ -6,7 +6,7 @@ const misc = require("../utill/misc")
 function get_jackpot_amount_wrapper(gameID){
     return new Promise(
         (resolve,reject)=>{
-            if(!validator.isNumeric(gameID)) reject ("gameID는 숫자여야합니다.")
+            if(!validator.isNumeric(String(gameID))) reject ("gameID는 숫자여야합니다.")
             return get_jackpot_amount(gameID, resolve, reject)
         })
 }
@@ -66,7 +66,7 @@ function set_jackpot_amount(gameID, val, resolve, reject){
 function add_jackpot_amount_wrapper(gameID, amount){
     return new Promise(
         (resolve,reject)=>{
-            if(!validator.isNumeric(gameID) || !validator.isNumeric(amount)) reject ("잘못된 형식입니다.")
+            if(!validator.isNumeric(String(gameID)) || !validator.isNumeric(String(amount))) reject ("잘못된 형식입니다.")
             return add_jackpot_amount(gameID, amount, resolve, reject)
         })
 }

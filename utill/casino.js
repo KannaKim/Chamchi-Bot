@@ -1,3 +1,7 @@
+function fifty_fifty_win(guess){
+    const guess_dic = {0:"홀", 1:"짝"}
+    return guess_dic[Math.floor(Math.random()*2)] == guess
+}
 function createRow(n, nDuplicate , reward, size){
     if( n<=0 || size<=0 ){
         throw TypeError("n or size can't be 0 or less")
@@ -38,4 +42,5 @@ module.exports = {
     createRow,
     nDuplicateExist,
     arrHasK_N_times,
+    fifty_fifty_win
 }

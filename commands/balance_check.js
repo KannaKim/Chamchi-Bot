@@ -30,7 +30,7 @@ module.exports = {
         for(let i=0; i<interaction.options.data.length; i++){
             option_val.set(interaction.options.data[i].name, interaction.options.data[i].value)
         }
-        const target_id = option_val.get("대상") 
+        const target_id = option_val.has("대상")?discord_util.mention_to_id(option_val.get("대상")):undefined 
         const asset_name = option_val.get("포인트종류") 
         if(option_val.has("포인트종류") && option_val.has("대상")){
             balance_msg = await balance.get_point(target_id,asset_name)
@@ -44,34 +44,6 @@ module.exports = {
         else{
             balance_msg = await balance.get_statement(interaction.user.id)
         }
-        // if(interaction.options.data.length == 1){
-        //     option_val.set(interaction.options.data[0].name, interaction.options.data[0].value)
-            
-        //     if(option_val.has("대상")){
-        //         const id = discord_util.mention_to_id(option_val.get("대상"))
-        //         if(id == null){
-        //             balance_msg = "대상이 유효하지않습니다."
-        //         }
-        //         else{
-        //             balance_msg = await balance.get_statement(id)
-        //         }
-        //     }
-        //     else if(option_val.has("포인트종류")){
-        //         balance_msg = await balance.get_point(interaction.user.id, option_val.get("포인트종류"))
-                
-        //     }
-        // }
-        // else if(interaction.options.data.length == 2){
-        //     option_val.set(interaction.options.data[0].name, interaction.options.data[0].value)
-        //     option_val.set(interaction.options.data[1].name, interaction.options.data[1].value)
-
-        //     const id = discord_util.mention_to_id(option_val.get("대상"))
-        //     balance_msg = await balance.get_point(id, definition.currency_type.get( option_val.get("포인트종류")))
-        // }   
-        // else if(interaction){
-        //     // balance_msg = await balance.get_statement(interaction.user.id).catch(reject=> balance_msg = reject)
-        //     balance_msg = await balance.get_statement(interaction.user.id)
-        // }
         await interaction.reply(balance_msg)
 	},
 };``

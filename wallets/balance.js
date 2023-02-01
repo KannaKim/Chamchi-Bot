@@ -7,9 +7,9 @@ const discord_util = require("../utill/discord")
 function subtract_wrapper(target, type, amount){
     return new Promise(
         (resolve, reject)=>{
-            if( !(validator.isNumeric(String(target)))) reject("잘못된 대상입니다.")
-            else if( !misc.isEnglisOrUnderScore(String(type)) ) reject("잘못된 타입입니다.")
-            else if( !validator.isNumeric(String(amount)) ) reject("잘못된 양입니다.")
+            if( !(validator.isNumeric(String(target)))) return reject("잘못된 대상입니다.")
+            else if( !misc.isEnglisOrUnderScore(String(type)) ) return reject("잘못된 타입입니다.")
+            else if( !validator.isNumeric(String(amount)) ) return reject("잘못된 양입니다.")
             return subtract(target, type, amount, resolve, reject)
         }
     )
@@ -36,9 +36,9 @@ function subtract(target, type, amount, resolve, reject){
 function add_wrapper(target, type, amount){
     return new Promise(
         (resolve, reject)=>{
-            if( !(validator.isNumeric(String(target)))) reject("잘못된 대상입니다.")
-            else if( !misc.isEnglisOrUnderScore(type) ) reject("잘못된 타입입니다.")
-            else if( !validator.isNumeric(String(amount)) ) reject("잘못된 양입니다.")
+            if( !(validator.isNumeric(String(target)))) return reject("잘못된 대상입니다.")
+            else if( !misc.isEnglisOrUnderScore(type) ) return reject("잘못된 타입입니다.")
+            else if( !validator.isNumeric(String(amount)) ) return reject("잘못된 양입니다.")
 
             return add(target, type, amount, resolve, reject)
         }
@@ -70,7 +70,7 @@ function add(target, type, amount, resolve, reject){
 function set_wrapper(target, type, amount){   //commands:[@참치, 잔고설정, 185979168822001665, 참치, 10000]
     return new Promise((resolve, reject)=>{
         if(!validator.isNumeric(String(target)) || !misc.isEnglisOrUnderScore(type) ||
-        !validator.isNumeric(String(amount))) reject("잘못된 사용법입니다.\n@봇멘션 잔고설정 [ @mention | id ] [참치 | 명예] [amount]\n사용 예시:@참치 잔고설정 185979168822001665 참치 10000")
+        !validator.isNumeric(String(amount))) return reject("잘못된 사용법입니다.\n@봇멘션 잔고설정 [ @mention | id ] [참치 | 명예] [amount]\n사용 예시:@참치 잔고설정 185979168822001665 참치 10000")
     
         return set(target, type, amount, resolve, reject)
     })
@@ -98,7 +98,9 @@ function set(target, type, amount, resolve, reject){
 function get_point_wrapper(user_id, type){
     return new Promise(
         (resolve,reject)=>{
-            if(!validator.isNumeric(String(user_id)) || !misc.isEnglisOrUnderScore(type)) reject ("")
+            if(!validator.isNumeric(String(user_id)) || !misc.isEnglisOrUnderScore(type)){
+                return reject ("잘못된 형식입니다.")
+            }
         
             return get_point(user_id, type, resolve, reject)
         }

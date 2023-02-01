@@ -1,0 +1,14 @@
+{
+    "fifty_fifty":{
+        "name": "홀짝",
+        "fee_in_percentages": "5"
+    },
+    "wallet_create":{
+        "name":{
+            "Korean": "지갑개설"
+        },
+        "description":{
+            "Korean": "참치서버용 지갑을 개설합니다."
+        }
+    }
+}

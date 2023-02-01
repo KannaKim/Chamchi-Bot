@@ -8,7 +8,7 @@ module.exports = {
         +'사용예시:\n/홀짝 100 홀')
         .addIntegerOption(option =>
 			option.setName('베팅양')
-				.setDescription('베팅할 칩의 양, 정수만 가능합니다.').setMinValue(100).setMaxValue(100000)
+				.setDescription('베팅할 칩의 양, 정수만 가능합니다.').setMinValue(10).setMaxValue(10000)
 				.setRequired(true))
 		.addStringOption(option =>
             option.setName('홀짝')
